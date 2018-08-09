@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>QQ音乐API | NewLife</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="" >
+    <meta name="description" content="New Life New Start!" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="NewLife" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico" >
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">NewLife</span>
+                    <span class="description">New Life New Start!</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2018/08/10/qq-music-api/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2018/08/10/qq-music-api/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/2018/08/10/qq-music-api/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2018/08/10/qq-music-api/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/binyuj" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://coding.net" target="_blank">Coding</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="http://weibo.com/" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="https://www.facebook.com/" class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/binyuj.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>QQ音乐API</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2018-08-09T17:15:42.000Z">2018-08-10</time>
+    </p>
+    <div class="post-content">
+        <h2 id="获取-mp3-播放地址"><a href="#获取-mp3-播放地址" class="headerlink" title="获取 mp3 播放地址"></a>获取 mp3 播放地址</h2><h3 id="获取vkey"><a href="#获取vkey" class="headerlink" title="获取vkey"></a>获取vkey</h3><figure class="highlight plain"><figcaption><span>https://c.y.qq.com/base/fcgi-bin/fcg_musicexpress.fcg?json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;- `guid`：一个生成的随机数，也可以直接随便写</span><br><span class="line">&gt;- `&apos;Referer&apos;: &apos;http://y.qq.com/portal/player.html&apos;` **必须在请求的头部加上这个**，不然获取的`vkey`无效</span><br><span class="line"></span><br><span class="line">得到的结果：</span><br><span class="line">```json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;code&quot;: 0,</span><br><span class="line">    &quot;sip&quot;: [&quot;http://dl.stream.qqmusic.qq.com/&quot;, &quot;http://isure.stream.qqmusic.qq.com/&quot;],</span><br><span class="line">    &quot;thirdip&quot;: [&quot;http://thirdparty.gtimg.com/abcd1234/&quot;, &quot;http://thirdparty.gtimg.com/abcd1234/&quot;],</span><br><span class="line">    &quot;testfile2g&quot;: &quot;C100003mAan70zUy5O.m4a&quot;,</span><br><span class="line">    &quot;testfilewifi&quot;: &quot;C100003mAan70zUy5O.m4a&quot;,</span><br><span class="line">    &quot;key&quot;: &quot;74D67EB31D82DA3E2E29D4190970E393A955944A2957F9650362987A61EB740F08B770534FF87506CE4B77CAB00A4EC5ED43B77E4107CA3B&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>构造播放地址：<br><code>$sip</code>+<code>$typecode</code> + <code>$mid</code> + <code>$filetype</code> + + <code>&quot;?vkey=&quot;</code> + <code>$vkey</code> + <code>&amp;guid={$vkey}&amp;fromtag=30</code></p>
+<blockquote>
+<p><code>sip</code> 可以从json数据获取，也可以直接固定为<code>http://dl.stream.qqmusic.qq.com/</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><code>$typecode</code></th>
+<th><code>$filetype</code></th>
+<th><code>码率</code></th>
+<th><code>fromtag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C100</td>
+<td>.m4a</td>
+<td></td>
+<td>66</td>
+</tr>
+<tr>
+<td>C400</td>
+<td>.m4a</td>
+<td></td>
+<td>66</td>
+</tr>
+<tr>
+<td>M500</td>
+<td>.mp3</td>
+<td>128kbps</td>
+<td>30</td>
+</tr>
+<tr>
+<td>M800</td>
+<td>.mp3</td>
+<td>320kbps</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>m4a需要用另一种方式获取</strong>(直接分析网页版播放器)</p>
+</blockquote>
+<p>eg: <code>http://dl.stream.qqmusic.qq.com/M50000020dtF0pnbCs.mp3?vkey=AAFFF5F114674B0EFE9DC5AD26D40CCD2351DFE29769F1D52EAA27EA977721BD4F002F2592BC206C719195E110231A92991594EEA363272E&amp;guid=144027205&amp;fromtag=30</code></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Web技术/">Web技术</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/qq音乐/" title="qq音乐">qq音乐</a> / 
+    
+        <a href="/tags/API/" title="API">API</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2018/08/10/XMLHttpRequest-image-upload/">
+            
+                XMLHttpRequest 文件上传
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2018/07/30/hello-world/">
+            
+                Hello World
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Web技术/">Web技术</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/AJAX/" title="AJAX">AJAX (1)</a>
+  
+    <a class="tag-item" href="/tags/XMLHttpRequest/" title="XMLHttpRequest">XMLHttpRequest (1)</a>
+  
+    <a class="tag-item" href="/tags/qq音乐/" title="qq音乐">qq音乐 (1)</a>
+  
+    <a class="tag-item" href="/tags/API/" title="API">API (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2018
+    
+
+    <a href="/">binyu_J</a>
+     | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
